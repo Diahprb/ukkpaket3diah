@@ -16,6 +16,17 @@ class ListAspirasis extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            \pxlrbt\FilamentExcel\Actions\Pages\ExportAction::make()
+                ->label('Export Data')
+                ->color('success')
+                ->icon('heroicon-o-document-arrow-down')
+                ->exports([
+                    \pxlrbt\FilamentExcel\Exports\ExcelExport::make('excel')->label('Export as Excel')->withFilename('Aspirasi-' . date('Y-m-d')),
+                    \pxlrbt\FilamentExcel\Exports\ExcelExport::make('pdf')
+                        ->label('Export as PDF')
+                        ->withFilename('Aspirasi-' . date('Y-m-d') . '.pdf')
+                        ->withWriterType(\Maatwebsite\Excel\Excel::DOMPDF ?? 'Dompdf'),
+                ]),
             CreateAction::make()
                 ->label('Buat Aspirasi')
         ];

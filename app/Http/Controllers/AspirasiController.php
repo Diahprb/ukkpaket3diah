@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aspirasi;
 use App\Models\Kategori;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +61,11 @@ class AspirasiController extends Controller
                 Notification::make()
                     ->title('Aspirasi Baru!')
                     ->body('Ada aspirasi baru dari siswa.')
+                    ->actions([
+                        Action::make('view')
+                            ->label('Lihat Aspirasi')
+                            ->url(fn() => route('filament.admin.resources.aspirasis.view', ['record' => $aspirasi->id]), true)
+                    ])
                     ->sendToDatabase($value);
         }
 
@@ -97,7 +103,7 @@ class AspirasiController extends Controller
      */
     public function update(Request $request, Aspirasi $aspirasi)
     {
-        if ($aspirasi->user_id !== Auth::guard('siswa')->id()) {
+        if ($aspirasi->siswa_id !== Auth::guard('siswa')->id()) {
             abort(403);
         }
 
@@ -124,5 +130,17 @@ class AspirasiController extends Controller
         $aspirasi->delete();
 
         return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil dihapus.');
+    }
+
+    public function histori(Request $request)
+    {
+        $aspirasis = Auth::guard('siswa')
+            ->user()
+            ->aspirasis()
+            ->when($request->status, fn($q, $s) => $q->where('status', $s))
+            ->latest()
+            ->paginate(10);
+
+        return view('aspirasi.histori', compact('aspirasis'));
     }
 }

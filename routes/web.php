@@ -21,19 +21,21 @@ Route::post('/login', [StudentAuthController::class, 'login']);
 Route::post('/logout', [StudentAuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // aspirasi pages protected by auth
-Route::middleware('auth:siswa')->group(function () {
-    Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.index');
+Route::middleware('auth:siswa')->prefix('aspirasi')->group(function () {
+    Route::get('/', [AspirasiController::class, 'index'])->name('aspirasi.index');
 
-    Route::get('/aspirasi/create', [AspirasiController::class, 'create'])->name('aspirasi.create');
-    Route::post('/aspirasi/store', [AspirasiController::class, 'store'])->name('aspirasi.store');
+    Route::get('/create', [AspirasiController::class, 'create'])->name('aspirasi.create');
+    Route::post('store', [AspirasiController::class, 'store'])->name('aspirasi.store');
+
+    Route::get('/histori', [AspirasiController::class, 'histori'])->name('aspirasi.histori');
 
     // view single aspirasi
-    Route::get('/aspirasi/{aspirasi}', [AspirasiController::class, 'show'])->name('aspirasi.show');
+    Route::get('/{aspirasi}', [AspirasiController::class, 'show'])->name('aspirasi.show');
 
     // edit & update
-    Route::get('/aspirasi/{aspirasi}/edit', [AspirasiController::class, 'edit'])->name('aspirasi.edit');
-    Route::put('/aspirasi/{aspirasi}', [AspirasiController::class, 'update'])->name('aspirasi.update');
+    Route::get('/{aspirasi}/edit', [AspirasiController::class, 'edit'])->name('aspirasi.edit');
+    Route::put('/{aspirasi}', [AspirasiController::class, 'update'])->name('aspirasi.update');
 
     // delete
-    Route::delete('/aspirasi/{aspirasi}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');
+    Route::delete('/{aspirasi}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');
 });

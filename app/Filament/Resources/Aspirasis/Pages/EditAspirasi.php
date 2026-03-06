@@ -16,4 +16,11 @@ class EditAspirasi extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        // dd($this->record);
+        $data['keterangan'] = $this->record->keterangan;
+        return parent::mutateFormDataBeforeFill($data);
+    }
 }

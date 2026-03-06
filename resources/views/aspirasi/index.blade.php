@@ -1,7 +1,7 @@
 @extends('layouts.app')
-
+@section('title', 'List Aspirasi')
 @section('content')
-<div class="min-h-screen py-10 px-4" style="background:#0B1D3A">
+<div>
 <div class="max-w-2xl mx-auto">
 
     {{-- Hero Header --}}

@@ -80,8 +80,15 @@ class AspirasisTable
                 EditAction::make(),
                 ViewAction::make(),
             ])
-            ->toolbarActions([
+            ->bulkActions([
                 BulkActionGroup::make([
+                    \pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction::make()->exports([
+                        \pxlrbt\FilamentExcel\Exports\ExcelExport::make('excel')->label('Export as Excel')->withFilename('Aspirasi-Bulk-' . date('Y-m-d')),
+                        \pxlrbt\FilamentExcel\Exports\ExcelExport::make('pdf')
+                            ->label('Export as PDF')
+                            ->withFilename('Aspirasi-Bulk-' . date('Y-m-d') . '.pdf')
+                            ->withWriterType(\Maatwebsite\Excel\Excel::DOMPDF ?? 'Dompdf'),
+                    ]),
                     DeleteBulkAction::make(),
                 ]),
             ]);

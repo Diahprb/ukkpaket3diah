@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <x-filament::section>
     {{ $this->content }}
     </x-filament::section>
@@ -19,7 +19,7 @@
             @else
                 <div class="grid gap-4 md:grid-cols-2">
                     @foreach($record->aspirasis as $asp)
-                        <div class="bg-white p-4 rounded shadow">
+                        <div class="bg-white dark:bg-black dark:text-white p-4 rounded shadow">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <div class="text-sm text-gray-500">{{ $asp->kategori?->nama_kategori ?? 'Umum' }}</div>
@@ -31,7 +31,7 @@
                                         <span class="px-2 py-1 rounded-full text-xs font-semibold capitalize {{ $asp->status === 'selesai' ? 'bg-green-100 text-green-800' : ($asp->status === 'proses' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">{{ $asp->status }}</span>
                                     </div>
                                     <div class="text-xs text-gray-500 mt-2">{{ $asp->created_at->format('d M Y H:i') }}</div>
-                                    <div class="mt-3"><a href="{{ route('aspirasi.show', $asp) }}" class="text-primary-600 hover:underline">Lihat detail</a></div>
+                                    <div class="mt-3"><a href="{{ route('filament.admin.resources.aspirasis.view', $asp->id) }}" class="text-primary-600 hover:underline">Lihat detail</a></div>
                                 </div>
                             </div>
                         </div>
