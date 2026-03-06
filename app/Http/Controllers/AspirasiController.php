@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AspirasiController extends Controller
 {
-    /**
-     * Show list of aspirasi submitted by the authenticated student.
-     */
+
     public function index()
     {
         // paginate to prevent heavy load, 10 items per page
@@ -27,36 +25,40 @@ class AspirasiController extends Controller
         return view('aspirasi.index', compact('aspirasis'));
     }
 
-    /**
-     * Display the form to create a new aspirasi.
-     */
+
     public function create()
     {
         $kategoris = Kategori::all();
         return view('aspirasi.create', compact('kategoris'));
     }
 
-    /**
-     * Store a newly created aspirasi in storage.
-     */
+
     public function store(Request $request)
     {
+
+
         $validated = $request->validate([
             'kategori_id' => ['required', 'exists:kategoris,id'],
             'judul' => ['required', 'string', 'max:255'],
             'keterangan' => ['required', 'string'],
         ]);
 
+        if ($request->bukti_lapor) {
+            $path = $request->file('bukti_lapor')->store('bukti_lapor', 'public');
+            $validated['bukti_lapor'] = $path;
+        }
 
         $aspirasi = Aspirasi::create([
             'siswa_id' => Auth::guard('siswa')->id(),
             'kategori_id' => $validated['kategori_id'],
             'judul' => $validated['judul'],
             'keterangan' => $validated['keterangan'],
+            'bukti_lapor' => $validated['bukti_lapor'] ?? null,
         ]);
 
 
-        $admin = \App\Models\Admin::all();
+
+        $admin = \App\Models\User::all();
         foreach ($admin as $value) {
                 Notification::make()
                     ->title('Aspirasi Baru!')
@@ -72,22 +74,16 @@ class AspirasiController extends Controller
         return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil dikirim.');
     }
 
-    /**
-     * Display a single aspirasi.
-     */
     public function show(Aspirasi $aspirasi)
     {
         // ensure the authenticated user owns the aspirasi
-        if ($aspirasi->user_id !== Auth::id()) {
+        if ($aspirasi->siswa_id !== Auth::guard('siswa')->id()) {
             abort(403);
         }
 
         return view('aspirasi.show', compact('aspirasi'));
     }
 
-    /**
-     * Show form for editing an aspirasi.
-     */
     public function edit(Aspirasi $aspirasi)
     {
         if ($aspirasi->siswa_id !== Auth::guard('siswa')->id()) {
@@ -98,9 +94,6 @@ class AspirasiController extends Controller
         return view('aspirasi.edit', compact('aspirasi', 'kategoris'));
     }
 
-    /**
-     * Update the specified aspirasi in storage.
-     */
     public function update(Request $request, Aspirasi $aspirasi)
     {
         if ($aspirasi->siswa_id !== Auth::guard('siswa')->id()) {
@@ -118,9 +111,7 @@ class AspirasiController extends Controller
         return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified aspirasi from storage.
-     */
+
     public function destroy(Aspirasi $aspirasi)
     {
         if ($aspirasi->siswa_id !== Auth::guard('siswa')->id()) {

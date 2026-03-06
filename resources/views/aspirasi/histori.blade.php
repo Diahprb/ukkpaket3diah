@@ -4,7 +4,7 @@
 
 @section('content')
 <div>
-<div class="max-w-3xl mx-auto">
+<div class="min-w-3xl mx-auto bg-black p-4 rounded shadow">
 
     {{-- Header --}}
     <div class="mb-6">

@@ -16,7 +16,7 @@ class AspirasiSeeder extends Seeder
 
         foreach ($siswa as $user) {
             Aspirasi::create([
-                'user_id' => $user->id,
+                // 'siswa_id' => $user->id,
                 'kategori_id' => $kategoris->random()->id,
                 'judul' => 'Perbaikan AC Kelas',
                 'keterangan' => 'AC di kelas kami tidak berfungsi dengan baik.',

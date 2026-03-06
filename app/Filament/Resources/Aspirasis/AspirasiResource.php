@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Aspirasis;
 use App\Filament\Resources\Aspirasis\Pages\CreateAspirasi;
 use App\Filament\Resources\Aspirasis\Pages\EditAspirasi;
 use App\Filament\Resources\Aspirasis\Pages\ListAspirasis;
+use App\Filament\Resources\Aspirasis\Pages\ProsesAspirasi;
 use App\Filament\Resources\Aspirasis\Pages\ViewAspirasi;
 use App\Filament\Resources\Aspirasis\Schemas\AspirasiForm;
 use App\Filament\Resources\Aspirasis\Tables\AspirasisTable;
@@ -47,6 +48,7 @@ class AspirasiResource extends Resource
             'create' => CreateAspirasi::route('/create'),
             'edit' => EditAspirasi::route('/{record}/edit'),
             'view' => ViewAspirasi::route('/{record}/view'),
+            'proses' => ProsesAspirasi::route('/{record}/proses'),
         ];
     }
 }

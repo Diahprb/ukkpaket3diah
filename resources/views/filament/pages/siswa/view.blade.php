@@ -19,7 +19,7 @@
             @else
                 <div class="grid gap-4 md:grid-cols-2">
                     @foreach($record->aspirasis as $asp)
-                        <div class="bg-white dark:bg-black dark:text-white p-4 rounded shadow">
+                        <div class="bg-white p-4 rounded shadow">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <div class="text-sm text-gray-500">{{ $asp->kategori?->nama_kategori ?? 'Umum' }}</div>

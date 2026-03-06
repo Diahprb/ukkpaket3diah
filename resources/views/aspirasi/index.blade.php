@@ -2,11 +2,11 @@
 @section('title', 'List Aspirasi')
 @section('content')
 <div>
-<div class="max-w-2xl mx-auto">
+<div class="min-w-4xl mx-auto">
 
     {{-- Hero Header --}}
-    <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-400/20"
-         style="background:linear-gradient(135deg,rgba(27,79,216,.35),rgba(14,165,233,.18))">
+    <div class="rounded-2xl bg-[#003566] p-7 mb-6 relative overflow-hidden border border-sky-400/20"
+         >
         <div class="absolute right-6 top-1/2 -translate-y-1/2 text-[72px] opacity-[.1] pointer-events-none select-none">🎓</div>
         <div class="flex items-start justify-between">
             <div>
@@ -40,7 +40,7 @@
     @endif
 
     {{-- List --}}
-    <div class="space-y-3.5">
+    <div class="space-y-3.5 grid grid-cols-2 gap-4">
 
         @forelse($aspirasis as $asp)
 
@@ -54,8 +54,7 @@
             @endphp
 
             <div onclick="window.location='{{ route('aspirasi.show', $asp->id) }}'"
-                 class="card-hover rounded-2xl p-5 border border-white/[.07] cursor-pointer"
-                 style="background:rgba(255,255,255,.04)">
+                 class="card-hover rounded-2xl p-6 min-h-32  border border-white/[.07] cursor-pointer bg-white shadow-md">
 
                 <div class="flex items-start justify-between gap-3">
 
@@ -64,11 +63,11 @@
                         <div class="text-[11.5px] font-semibold text-sky-400 mb-1">
                             {{ $asp->kategori->nama_kategori }}
                         </div>
-                        <div class="text-[15px] font-bold text-white truncate">
+                        <div class="text-[15px] font-bold text-gray-700 truncate">
                             {{ $asp->judul }}
                         </div>
                         @if($asp->feedback)
-                            <div class="mt-2.5 rounded-xl px-3.5 py-2.5 border border-emerald-500/20 text-[12.5px] text-white/70 line-clamp-2"
+                            <div class="mt-2.5 rounded-xl px-3.5 py-2.5 border border-emerald-500/20 text-[12.5px] text-gray-700/70 line-clamp-2"
                                  style="background:rgba(16,185,129,.07)">
                                 💬 {{ $asp->feedback }}
                             </div>
@@ -88,7 +87,7 @@
                         {{-- Actions --}}
                         <div class="flex items-center gap-2" onclick="event.stopPropagation()">
                             <a href="{{ route('aspirasi.edit', $asp->id) }}"
-                               class="px-3 py-1.5 rounded-lg text-[11.5px] font-semibold text-slate-300 border border-white/10 hover:bg-white/10 transition-all"
+                               class="px-3 py-1.5 rounded-lg text-[11.5px] font-semibold text-slate-500 border border-white/10 hover:bg-white/10 transition-all"
                                style="background:rgba(255,255,255,.06)">
                                 ✏️ Edit
                             </a>

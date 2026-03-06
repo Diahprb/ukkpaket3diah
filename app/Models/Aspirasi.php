@@ -15,6 +15,8 @@ class Aspirasi extends Model
         'feedback',
         'admin_id',
         'siswa_id',
+        'bukti_lapor',
+        'bukti_hasil'
     ];
 
     public function kategori()

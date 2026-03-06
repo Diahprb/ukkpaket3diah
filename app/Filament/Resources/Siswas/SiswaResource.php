@@ -21,6 +21,7 @@ class SiswaResource extends Resource
     protected static ?string $model = Siswa::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUser;
+    protected static ?string $navigationLabel = 'Siswa';
 
     protected static ?string $recordTitleAttribute = 'name';
 

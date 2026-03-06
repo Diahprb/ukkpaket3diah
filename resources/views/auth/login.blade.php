@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-md mx-auto">
+<div class="max-w-2xl py-30 mx-auto">
 
     <!-- Card -->
-    <div class="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
+    <div class="bg-white shadow-xl min-w-md rounded-2xl p-8 border border-gray-100">
 
         <!-- Header -->
         <div class="text-center mb-6">
@@ -17,31 +17,31 @@
         </div>
 
         <!-- Form -->
-        <form method="POST" action="{{ route('login') }}" class="space-y-5">
+        <form method="POST" action="{{ route('auth.login') }}" class="space-y-5">
             @csrf
 
-            <!-- Email -->
+            <!-- NIS -->
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-600 mb-1">
-                    Email
+                <label for="nis" class="block text-sm font-medium text-gray-600 mb-1">
+                    NIS
                 </label>
                 <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value="{{ old('email') }}"
+                    id="nis"
+                    type="nis"
+                    name="nis"
+                    value="{{ old('nis') }}"
                     required
                     autofocus
                     class="w-full rounded-xl border-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 text-sm shadow-sm"
                 >
-                @error('email')
+                @error('nis')
                     <span class="text-red-500 text-xs mt-1 block">
                         {{ $message }}
                     </span>
                 @enderror
             </div>
 
-            <!-- Password -->
+             <!-- Password -->
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-600 mb-1">
                     Password
@@ -59,7 +59,6 @@
                     </span>
                 @enderror
             </div>
-
             <!-- Button -->
             <button
                 type="submit"

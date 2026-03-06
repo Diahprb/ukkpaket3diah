@@ -9,7 +9,6 @@ Route::get('/', function () {
     if (auth()->check()) {
         return redirect()->route('aspirasi.index');
     }
-
     return view('welcome');
 });
 
@@ -17,7 +16,7 @@ Route::get('/', function () {
 Route::get('/login', [StudentAuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [StudentAuthController::class, 'register'])->name('register');
 Route::post('/register/store', [StudentAuthController::class, 'store'])->name('register.store');
-Route::post('/login', [StudentAuthController::class, 'login']);
+Route::post('/login/auth', [StudentAuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [StudentAuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // aspirasi pages protected by auth
@@ -34,7 +33,7 @@ Route::middleware('auth:siswa')->prefix('aspirasi')->group(function () {
 
     // edit & update
     Route::get('/{aspirasi}/edit', [AspirasiController::class, 'edit'])->name('aspirasi.edit');
-    Route::put('/{aspirasi}', [AspirasiController::class, 'update'])->name('aspirasi.update');
+    Route::put('/{aspirasi}/update', [AspirasiController::class, 'update'])->name('aspirasi.update');
 
     // delete
     Route::delete('/{aspirasi}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');

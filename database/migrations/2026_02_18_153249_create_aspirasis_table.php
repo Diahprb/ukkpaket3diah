@@ -13,7 +13,7 @@ return new class extends Migration
     {
        Schema::create('aspirasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('kategori_id')->constrained('kategoris')->cascadeOnDelete();
 
             $table->string('judul');

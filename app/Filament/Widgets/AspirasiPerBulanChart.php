@@ -14,7 +14,10 @@ class AspirasiPerBulanChart extends ChartWidget
 
     protected ?string $heading = 'Trend Aspirasi per Bulan (Tahun Ini)';
 
-    protected int|string|array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 1;
+
+    // protected ?string $maxHeight = '500px';
+
 
     protected function getData(): array
     {

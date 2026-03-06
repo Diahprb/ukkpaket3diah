@@ -25,11 +25,9 @@ class StudentAuthController extends Controller
      */
     public function login(Request $request)
     {
-
-
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+           'nis' => 'required',
+           'password' => 'required|string'
         ]);
 
 
@@ -41,8 +39,8 @@ class StudentAuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau kata sandi tidak cocok.',
-        ])->onlyInput('email');
+            'nis' => 'NIS atau kata sandi tidak cocok.',
+        ])->onlyInput('nis');
     }
 
     /**

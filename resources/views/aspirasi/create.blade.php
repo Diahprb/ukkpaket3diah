@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen py-10 px-4" style="background:#0B1D3A">
+<div class="min-h-screen py-10 px-4">
 
-    <div class="max-w-xl mx-auto">
+    <div class="min-w-3xl mx-auto">
 
         {{-- Hero Header --}}
-        <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-400/20"
-             style="background:linear-gradient(135deg,rgba(27,79,216,.30),rgba(14,165,233,.15))">
+        <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-400/20 bg-black"
+            >
             <div class="absolute right-7 top-1/2 -translate-y-1/2 text-[64px] opacity-[.12] pointer-events-none select-none">
                 📣
             </div>
@@ -20,7 +20,7 @@
         </div>
 
         {{-- Card Form --}}
-        <div class="rounded-2xl p-7 border border-white/[.07]" style="background:rgba(255,255,255,.04)">
+        <div class="rounded-2xl p-7 border border-white/[.07] bg-white shadow-md">
 
             {{-- Success Alert --}}
             @if(session('success'))
@@ -31,18 +31,18 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('aspirasi.store') }}" class="space-y-5">
+            <form method="POST" action="{{ route('aspirasi.store') }}" class="space-y-5"  enctype="multipart/form-data">
                 @csrf
 
                 {{-- Kategori --}}
                 <div>
-                    <label class="block text-[12.5px] font-semibold text-slate-200 mb-2">
+                    <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
                         Kategori <span class="text-red-400">*</span>
                     </label>
                     <select name="kategori_id"
-                            class="w-full rounded-xl px-4 py-2.5 text-[13.5px] border transition-all
+                            class="w-full rounded-xl px-4 py-2.5 text-[13.5px] border shadow transition-all
                                    @error('kategori_id') border-red-500/60 @else border-white/10 @enderror"
-                            style="background:rgba(255,255,255,.06);color:white;outline:none">
+                            style="background:rgba(255,255,255,.06);color:white">
                         <option value="" style="background:#0f2240">— Pilih kategori —</option>
                         @foreach($kategoris as $kat)
                             <option value="{{ $kat->id }}"
@@ -61,14 +61,14 @@
 
                 {{-- Judul --}}
                 <div>
-                    <label class="block text-[12.5px] font-semibold text-slate-200 mb-2">
+                    <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
                         Judul <span class="text-red-400">*</span>
                     </label>
                     <input type="text"
                            name="judul"
                            value="{{ old('judul') }}"
                            placeholder="Ringkasan singkat masalah..."
-                           class="w-full rounded-xl px-4 py-2.5 text-[13.5px] border transition-all
+                           class="w-full rounded-xl px-4 py-2.5 shadow text-[13.5px] border transition-all
                                   @error('judul') border-red-500/60 @else border-white/10 @enderror"
                            style="background:rgba(255,255,255,.06);color:white;outline:none">
                     @error('judul')
@@ -80,13 +80,13 @@
 
                 {{-- Keterangan --}}
                 <div>
-                    <label class="block text-[12.5px] font-semibold text-slate-200 mb-2">
+                    <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
                         Keterangan <span class="text-red-400">*</span>
                     </label>
                     <textarea name="keterangan"
                               rows="5"
                               placeholder="Ceritakan detail masalah secara lengkap..."
-                              class="w-full rounded-xl px-4 py-2.5 text-[13.5px] border transition-all resize-y leading-relaxed
+                              class="w-full rounded-xl px-4 shadow py-2.5 text-[13.5px] border transition-all resize-y leading-relaxed
                                      @error('keterangan') border-red-500/60 @else border-white/10 @enderror"
                               style="background:rgba(255,255,255,.06);color:white;outline:none">{{ old('keterangan') }}</textarea>
                     @error('keterangan')
@@ -96,10 +96,34 @@
                     @enderror
                 </div>
 
+                <div class="bg-gray-50 p-6 rounded bg-white shadow">
+                    <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
+                        Bukti Laporan (berupa Foto) <span class="text-red-400">*</span>
+                    </label>
+                   <input
+                        id="file-upload"
+                        name="bukti_lapor"
+                        type="file"
+                        class="block w-full text-sm text-gray-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-indigo-50 file:text-indigo-600
+                        hover:file:bg-indigo-100"
+                    />
+                    @error('keterangan')
+                        <span class="flex items-center gap-1 text-[11.5px] text-red-400 mt-1.5">
+                            <span>⚠</span> {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+
+
                 {{-- Actions --}}
                 <div class="flex gap-3 pt-1">
                     <a href="{{ route('aspirasi.index') }}"
-                       class="px-5 py-2.5 rounded-xl text-[13.5px] font-semibold border border-white/10 text-slate-300 hover:bg-white/10 transition-all text-center"
+                       class="px-5 py-2.5 rounded-xl text-[13.5px] font-semibold border border-white/10 text-slate-600 hover:bg-white/10 transition-all text-center"
                        style="background:rgba(255,255,255,.06)">
                         ← Kembali
                     </a>

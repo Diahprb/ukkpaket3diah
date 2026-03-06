@@ -12,6 +12,8 @@ class AspirasiPerKategoriChart extends ChartWidget
 {
     use InteractsWithPageFilters;
 
+    protected ?string $maxHeight = '400px';
+
     protected ?string $heading = 'Aspirasi berdasarkan Kategori';
 
     protected function getData(): array

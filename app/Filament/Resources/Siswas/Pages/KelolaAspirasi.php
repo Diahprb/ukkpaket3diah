@@ -3,19 +3,19 @@
 namespace App\Filament\Resources\Siswas\Pages;
 
 use App\Filament\Resources\Siswas\SiswaResource;
-use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
+use Filament\Pages\Page;
 
-class ListSiswas extends ListRecords
+class KelolaAspirasi extends Page
 {
     protected static string $resource = SiswaResource::class;
-    protected ?string $heading = 'Siswa';
 
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
-                ->label('Buat Siswa'),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Aspirasis\Pages;
 
 use App\Filament\Resources\Aspirasis\AspirasiResource;
-use Filament\Actions\EditAction;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewAspirasi extends ViewRecord
@@ -13,7 +13,8 @@ class ViewAspirasi extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            // Action::make()
+            //     ->url(fn() => ),
         ];
     }
 }

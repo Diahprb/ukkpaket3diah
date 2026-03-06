@@ -2,9 +2,15 @@
 
 namespace App\Filament\Resources\Aspirasis\Tables;
 
+use App\Filament\Exports\AspirasiExporter;
+use App\Filament\Resources\Aspirasis\Pages\ProsesAspirasi;
+use App\Models\Aspirasi;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Tables\Columns\SelectColumn;
@@ -23,14 +29,10 @@ class AspirasisTable
             ->columns([
         TextColumn::make('siswa.name')
                     ->label('Siswa')
-                    ->searchable()
-                    ->numeric()
                     ->sortable(),
                 TextColumn::make('kategori.nama_kategori')
-                    ->searchable()
                     ->sortable(),
-                TextColumn::make('judul')
-                    ->searchable(),
+                TextColumn::make('judul'),
                 TextColumn::make('created_at')
                     ->label('Dibuat Pada')
                     ->dateTime()
@@ -59,11 +61,13 @@ class AspirasisTable
                     ->relationship('kategori', 'nama_kategori')
                     ->label('Kategori')
                     ->multiple()
+                    ->preload()
                     ->searchable(),
 
                 SelectFilter::make('siswa')
                     ->relationship('siswa', 'name')
                     ->label('Siswa')
+                    ->preload()
                     ->multiple()
                     ->searchable(),
 
@@ -73,12 +77,19 @@ class AspirasisTable
                     ->label('Tanggal Dibuat')
                     ->placeholder('Pilih tanggal'),])
             ], FiltersLayout::AboveContent)
-            ->toolbarActions([
-
+            ->headerActions([
+                 ExportAction::make('aspirasi')
+                    ->label('Ekspor Aspirasi')
+                    ->exporter(AspirasiExporter::class),
+                CreateAction::make()
+                ->label('Buat Aspirasi')
             ])
             ->recordActions([
-                EditAction::make(),
-                ViewAction::make(),
+                ViewAction::make()
+                    ->label('Lihat Aspirasi'),
+
+                Action::make('prosesAspirasi')
+                    ->url(fn($record)=> ProsesAspirasi::getUrl(['record' => $record]))
             ])
             ->bulkActions([
                 BulkActionGroup::make([

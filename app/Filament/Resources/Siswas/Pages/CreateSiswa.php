@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSiswa extends CreateRecord
 {
     protected static string $resource = SiswaResource::class;
+    protected ?string $heading = 'Buat Siswa';
+    protected static ?string $breadcrumb = 'Buat';
 }

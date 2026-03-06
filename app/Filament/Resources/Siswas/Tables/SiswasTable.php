@@ -11,18 +11,19 @@ use Filament\Tables\Table;
 
 class SiswasTable
 {
-    public static function configure(Table $table): Table
+    public static function  configure(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('nis')
                     ->searchable(),
                 TextColumn::make('kelas')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('Alamat Email')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -37,8 +38,10 @@ class SiswasTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()
+                    ->label(''),
+                EditAction::make()
+                    ->label(''),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

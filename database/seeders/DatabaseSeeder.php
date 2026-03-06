@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KategoriSeeder::class,
             AspirasiSeeder::class,
-            AdminSeeder::class,
             SiswaSeeder::class,
         ]);
     }
