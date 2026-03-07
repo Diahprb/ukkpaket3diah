@@ -111,6 +111,7 @@ class ProsesAspirasi extends EditRecord
         // only save status & feedback, ignore read-only display fields
         return [
             'status'   => 'selesai',
+            'bukti_hasil' => $data['bukti_hasil'],
             'feedback' => $data['feedback'] ?? null,
         ];
     }

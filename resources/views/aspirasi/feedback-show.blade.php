@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen py-10 px-4" style="background:#0B1D3A">
-<div class="max-w-xl mx-auto">
+<div class="min-h-screen px-4">
+<div class="min-w-2xl mx-auto">
 
     @php
         $statusMap = match($aspirasi->status) {
@@ -43,6 +43,14 @@
             <div class="p-6 border-b border-gray-100 flex flex-col items-center">
                 <div class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold mb-3">Bukti Laporan</div>
                 <img src="{{ asset('storage/' . $aspirasi->bukti_lapor) }}"
+                     class="rounded-xl border border-gray-200 max-w-xs w-full object-cover">
+            </div>
+        @endif
+
+        @if($aspirasi->bukti_hasil)
+            <div class="p-6 border-b border-gray-100 flex flex-col items-center">
+                <div class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold mb-3">Bukti Hasil Proses</div>
+                <img src="{{ asset('storage/' . $aspirasi->bukti_hasil) }}"
                      class="rounded-xl border border-gray-200 max-w-xs w-full object-cover">
             </div>
         @endif
