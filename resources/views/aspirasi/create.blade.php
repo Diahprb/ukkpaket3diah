@@ -40,17 +40,23 @@
                         Kategori <span class="text-red-400">*</span>
                     </label>
                     <select name="kategori_id"
-                            class="w-full rounded-xl px-4 py-2.5 text-[13.5px] border shadow transition-all
-                                   @error('kategori_id') border-red-500/60 @else border-white/10 @enderror"
-                            style="background:rgba(255,255,255,.06);color:white">
-                        <option value="" style="background:#0f2240">— Pilih kategori —</option>
+                        class="w-full rounded-xl px-4 py-2.5 text-[13.5px] border border-gray-200 border-1 shadow transition-all"
+                        style="color:black">
+
+                        <option value=""
+                            style="background:rgba(214, 214, 214, 0.08);">
+                            — Pilih kategori —
+                        </option>
+
                         @foreach($kategoris as $kat)
                             <option value="{{ $kat->id }}"
-                                    style="background:#0f2240"
-                                    {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
+                                class="text-gray-700"
+                                style="background:rgba(214, 214, 214, 0.08);"
+                                {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
                                 {{ $kat->nama_kategori }}
                             </option>
                         @endforeach
+
                     </select>
                     @error('kategori_id')
                         <span class="flex items-center gap-1 text-[11.5px] text-red-400 mt-1.5">
@@ -68,9 +74,9 @@
                            name="judul"
                            value="{{ old('judul') }}"
                            placeholder="Ringkasan singkat masalah..."
-                           class="w-full rounded-xl px-4 py-2.5 shadow text-[13.5px] border transition-all
-                                  @error('judul') border-red-500/60 @else border-white/10 @enderror"
-                           style="background:rgba(255,255,255,.06);color:white;outline:none">
+                           class="w-full rounded-xl px-4 py-2.5 shadow text-[13.5px] border  transition-all
+                                  @error('judul') border-red-500/60 @else border-gray-200 border-1 @enderror"
+                           style="background:rgba(255,255,255,.06);color:black;outline:none">
                     @error('judul')
                         <span class="flex items-center gap-1 text-[11.5px] text-red-400 mt-1.5">
                             <span>⚠</span> {{ $message }}
@@ -87,8 +93,8 @@
                               rows="5"
                               placeholder="Ceritakan detail masalah secara lengkap..."
                               class="w-full rounded-xl px-4 shadow py-2.5 text-[13.5px] border transition-all resize-y leading-relaxed
-                                     @error('keterangan') border-red-500/60 @else border-white/10 @enderror"
-                              style="background:rgba(255,255,255,.06);color:white;outline:none">{{ old('keterangan') }}</textarea>
+                                     @error('keterangan') border-red-500/60 @else border-gray-200 border-1 @enderror"
+                              style="background:rgba(255,255,255,.06);color:black;outline:none">{{ old('keterangan') }}</textarea>
                     @error('keterangan')
                         <span class="flex items-center gap-1 text-[11.5px] text-red-400 mt-1.5">
                             <span>⚠</span> {{ $message }}
@@ -96,7 +102,7 @@
                     @enderror
                 </div>
 
-                <div class="bg-gray-50 p-6 rounded bg-white shadow">
+                <div class="bg-gray-50 p-6 rounded bg-white shadow border-gray-200 border-1">
                     <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
                         Bukti Laporan (berupa Foto) <span class="text-red-400">*</span>
                     </label>
@@ -109,7 +115,8 @@
                         file:rounded-full file:border-0
                         file:text-sm file:font-semibold
                         file:bg-indigo-50 file:text-indigo-600
-                        hover:file:bg-indigo-100"
+                        hover:file:bg-indigo-100
+                        border-gray-200 border-1 p-4 rounded"
                     />
                     @error('keterangan')
                         <span class="flex items-center gap-1 text-[11.5px] text-red-400 mt-1.5">

@@ -40,7 +40,10 @@
     @endif
 
     {{-- List --}}
-    <div class="space-y-3.5 grid grid-cols-2 gap-4">
+    @php
+        $grid = isset($aspirasis) && count($aspirasis) > 1 ? 'grid-cols-2' : 'grid-cols-1';
+    @endphp
+    <div class="space-y-3.5 grid {{ $grid }} gap-4">
 
         @forelse($aspirasis as $asp)
 
