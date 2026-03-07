@@ -4,11 +4,11 @@
 
 @section('content')
 <div>
-<div class="min-w-3xl mx-auto bg-black p-4 rounded shadow">
+<div class="min-w-3xl bg-white mx-auto p-4 rounded shadow">
 
     {{-- Header --}}
     <div class="mb-6">
-        <div class="font-extrabold text-[22px] text-white tracking-tight">Histori Aspirasi 🕐</div>
+        <div class="font-extrabold text-[22px] text-black tracking-tight">Histori Aspirasi 🕐</div>
         <div class="text-[13.5px] text-slate-400 mt-1">Semua aspirasi yang pernah kamu ajukan</div>
     </div>
 
@@ -95,14 +95,14 @@
             @endphp
 
             <div onclick="window.location='{{ route('aspirasi.show', $asp->id) }}'"
-                 class="card-hover rounded-2xl p-5 border border-white/[.07] cursor-pointer"
+                 class="card-hover rounded-2xl p-5 border border-black/[.07] cursor-pointer"
                  style="background:rgba(255,255,255,.04)">
 
                 {{-- Top row --}}
                 <div class="flex items-start justify-between mb-2">
                     <div>
                         <div class="text-[11px] text-sky-400 font-bold">#{{ str_pad($asp->id, 3, '0', STR_PAD_LEFT) }}</div>
-                        <div class="text-[15px] font-bold text-white mt-0.5">{{ $asp->judul }}</div>
+                        <div class="text-[15px] font-bold text-gray-500 mt-0.5">{{ $asp->judul }}</div>
                         <div class="text-[12px] text-slate-400 mt-1">
                             📅 {{ $asp->created_at->translatedFormat('j M Y') }}
                             &nbsp;·&nbsp;
@@ -122,7 +122,7 @@
                 </div>
 
                 {{-- Progress track --}}
-                <div class="prog-track">
+                <div class="prog-track ">
                     @foreach($steps as $n => $lbl)
                         @php
                             $done   = $n < $statusMap['step'];
@@ -198,7 +198,7 @@
     .prog-track::before {
         content: ''; position: absolute;
         top: 14px; left: 14px; right: 14px;
-        height: 2px; background: rgba(255,255,255,.08); z-index: 0;
+        height: 2px; background: rgba(34, 34, 34, 0.08); z-index: 0;
     }
     .prog-step {
         flex: 1; display: flex; flex-direction: column;

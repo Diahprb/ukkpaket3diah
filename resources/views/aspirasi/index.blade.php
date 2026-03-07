@@ -41,9 +41,9 @@
 
     {{-- List --}}
     @php
-        $grid = isset($aspirasis) && count($aspirasis) > 1 ? 'grid-cols-2' : 'grid-cols-1';
+        $grid = isset($aspirasis) && count($aspirasis) > 3 ? 'grid-cols-2' : 'grid-cols-1';
     @endphp
-    <div class="space-y-3.5 grid {{ $grid }} gap-4">
+    <div class="grid {{ $grid }} gap-3">
 
         @forelse($aspirasis as $asp)
 

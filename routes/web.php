@@ -34,6 +34,8 @@ Route::middleware('auth:siswa')->prefix('aspirasi')->group(function () {
     // edit & update
     Route::get('/{aspirasi}/edit', [AspirasiController::class, 'edit'])->name('aspirasi.edit');
     Route::put('/{aspirasi}/update', [AspirasiController::class, 'update'])->name('aspirasi.update');
+    Route::get('/aspirasi/feedback',        [AspirasiController::class, 'feedback'])->name('aspirasi.feedback');
+    Route::get('/aspirasi/{aspirasi}/feedback/detail', [AspirasiController::class, 'feedbackShow'])->name('aspirasi.feedback.show');
 
     // delete
     Route::delete('/{aspirasi}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');

@@ -134,4 +134,25 @@ class AspirasiController extends Controller
 
         return view('aspirasi.histori', compact('aspirasis'));
     }
+
+    public function feedback()
+    {
+        $aspirasis = Auth::guard('siswa')
+            ->user()
+            ->aspirasis()
+            ->whereNotNull('feedback')
+            ->latest()
+            ->paginate(10);
+
+        return view('aspirasi.feedback', compact('aspirasis'));
+    }
+
+    public function feedbackShow(Aspirasi $aspirasi)
+    {
+        if ($aspirasi->siswa_id !== Auth::guard('siswa')->id()) {
+            abort(403);
+        }
+
+        return view('aspirasi.feedback-show', compact('aspirasi'));
+    }
 }
