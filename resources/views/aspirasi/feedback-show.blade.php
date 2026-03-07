@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen px-4">
-<div class="min-w-2xl mx-auto">
+<div class="min-w-xl mx-auto">
 
     @php
         $statusMap = match($aspirasi->status) {
@@ -40,7 +40,7 @@
         </div>
 
         @if($aspirasi->bukti_lapor)
-            <div class="p-6 border-b border-gray-100 flex flex-col items-center">
+            <div class="p-6 border-b border-gray-100 flex flex-col items-center min-w-4xl">
                 <div class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold mb-3">Bukti Laporan</div>
                 <img src="{{ asset('storage/' . $aspirasi->bukti_lapor) }}"
                      class="rounded-xl border border-gray-200 max-w-xs w-full object-cover">
@@ -48,7 +48,7 @@
         @endif
 
         @if($aspirasi->bukti_hasil)
-            <div class="p-6 border-b border-gray-100 flex flex-col items-center">
+            <div class="p-6 border-b border-gray-100 flex flex-col items-center min-w-4xl">
                 <div class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold mb-3">Bukti Hasil Proses</div>
                 <img src="{{ asset('storage/' . $aspirasi->bukti_hasil) }}"
                      class="rounded-xl border border-gray-200 max-w-xs w-full object-cover">
