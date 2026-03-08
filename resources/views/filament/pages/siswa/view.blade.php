@@ -17,9 +17,13 @@
             @if($record->aspirasis->isEmpty())
                 <div class="text-sm text-gray-600">Belum ada aspirasi.</div>
             @else
-                <div class="grid gap-4 md:grid-cols-2">
+                @php
+                   $grid =  $record->aspirasis->count() > 3 ? 'grid-cols-2' : ''
+                @endphp
+                <div class="grid gap-4 md:{{ $grid }}">
                     @foreach($record->aspirasis as $asp)
-                        <div class="bg-white p-4 rounded shadow">
+                        <div class="bg-white p-4 rounded shadow border border-0.5 border-gray-500/20 cursor-pointer"
+                            onclick="window.location='{{ route('filament.admin.resources.aspirasis.view', $asp->id) }}'">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <div class="text-sm text-gray-500">{{ $asp->kategori?->nama_kategori ?? 'Umum' }}</div>

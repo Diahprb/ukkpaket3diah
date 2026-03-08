@@ -13,6 +13,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Support\Colors\Color;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -37,13 +38,13 @@ class AspirasisTable
                     ->label('Dibuat Pada')
                     ->dateTime()
                     ->sortable(),
-                SelectColumn::make('status')
-                    ->options([
-                        'menunggu' => 'Menunggu',
-                        'proses' => 'Di Proses',
-                        'selesai' => 'Selesai',
-                    ])
-                    ->native(false)
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn($state) => match($state) {
+                        'menunggu' => 'warning',
+                        'proses' => 'info',
+                        'selesai' => Color::Lime
+                    })
                     ->sortable(),
             ])
             ->filters([
@@ -89,17 +90,11 @@ class AspirasisTable
                     ->label('Lihat Aspirasi'),
 
                 Action::make('prosesAspirasi')
+                    ->hidden(fn($record) => $record->status == 'selesai')
                     ->url(fn($record)=> ProsesAspirasi::getUrl(['record' => $record]))
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    \pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction::make()->exports([
-                        \pxlrbt\FilamentExcel\Exports\ExcelExport::make('excel')->label('Export as Excel')->withFilename('Aspirasi-Bulk-' . date('Y-m-d')),
-                        \pxlrbt\FilamentExcel\Exports\ExcelExport::make('pdf')
-                            ->label('Export as PDF')
-                            ->withFilename('Aspirasi-Bulk-' . date('Y-m-d') . '.pdf')
-                            ->withWriterType(\Maatwebsite\Excel\Excel::DOMPDF ?? 'Dompdf'),
-                    ]),
                     DeleteBulkAction::make(),
                 ]),
             ]);

@@ -5,30 +5,7 @@
 <div class="min-w-4xl mx-auto">
 
     {{-- Hero Header --}}
-    <div class="rounded-2xl bg-[#003566] p-7 mb-6 relative overflow-hidden border border-sky-400/20"
-         >
-        <div class="absolute right-6 top-1/2 -translate-y-1/2 text-[72px] opacity-[.1] pointer-events-none select-none">🎓</div>
-        <div class="flex items-start justify-between">
-            <div>
-                <div class="font-extrabold text-[22px] text-white mb-1 tracking-tight">Aspirasi Saya</div>
-                <div class="text-[13.5px] text-white/60">Suarakan aspirasimu untuk sekolah yang lebih baik.</div>
-            </div>
-            <div class="flex items-center gap-2 flex-shrink-0">
-                <a href="{{ route('aspirasi.create') }}"
-                   class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5"
-                   style="background:linear-gradient(135deg,#1B4FD8,#0EA5E9);box-shadow:0 4px 20px rgba(27,79,216,.4)">
-                    📝 Buat
-                </a>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-slate-300 border border-white/10 hover:bg-white/10 transition-all"
-                            style="background:rgba(255,255,255,.06)">
-                        Logout
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
+
 
     {{-- Success Alert --}}
     @if(session('success'))

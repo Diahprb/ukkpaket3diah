@@ -12,7 +12,8 @@
     <div class="">
         @extends('layouts.nav')
     </div>
-    <div class="w-full min-h-screen flex justify-center py-20">
+
+    <div class="w-full min-h-screen flex justify-center py-10">
         @yield('content')
     </div>
     @livewireScripts

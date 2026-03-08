@@ -53,7 +53,7 @@
         @php
             $filters = [
                 ''        => 'Semua',
-                'pending' => 'Pending',
+                'menunggu' => 'Menunggu',
                 'proses'  => 'Diproses',
                 'selesai' => 'Selesai',
             ];
