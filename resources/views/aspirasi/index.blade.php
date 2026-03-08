@@ -2,8 +2,13 @@
 @section('title', 'List Aspirasi')
 @section('content')
 <div>
-<div class="min-w-4xl mx-auto">
-
+<div class="min-w-4xl mx-auto space-y-4">
+    <a href="{{ route('aspirasi.create') }}"
+        class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5"
+        style="background:linear-gradient(135deg,#1B4FD8,#0EA5E9);box-shadow:0 4px 20px rgba(27,79,216,.4)">
+            <x-heroicon-o-pencil-square class="w-5 h-5"/>
+        Sampaikan Aspirasi
+    </a>
     {{-- Hero Header --}}
 
 

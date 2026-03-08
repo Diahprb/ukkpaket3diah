@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Aspirasi;
 use App\Models\Kategori;
+use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function Pest\Laravel\delete;
 
 class AspirasiController extends Controller
 {
@@ -59,17 +61,21 @@ class AspirasiController extends Controller
 
 
         $admin = \App\Models\User::all();
-        foreach ($admin as $value) {
+        User::chunk(100, function ($admins) use ($aspirasi) {
+            foreach ($admins as $admin) {
                 Notification::make()
                     ->title('Aspirasi Baru!')
                     ->body('Ada aspirasi baru dari siswa.')
                     ->actions([
                         Action::make('view')
                             ->label('Lihat Aspirasi')
-                            ->url(fn() => route('filament.admin.resources.aspirasis.view', ['record' => $aspirasi->id]), true)
-                    ])
-                    ->sendToDatabase($value);
-        }
+                            ->url(route('filament.admin.resources.aspirasis.view', $aspirasi->id))
+                    ]);
+                    // ->sendToDatabase($admin, [
+                    //     'aspirasi_id' => $aspirasi->id
+                    // ]);
+            }
+        });
 
         return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil dikirim.');
     }
