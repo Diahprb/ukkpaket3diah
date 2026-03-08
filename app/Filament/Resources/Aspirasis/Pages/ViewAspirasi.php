@@ -10,6 +10,17 @@ class ViewAspirasi extends ViewRecord
 {
     protected static string $resource = AspirasiResource::class;
 
+
+    public function mount(int|string $record): void
+    {
+        parent::mount($record);
+        if ($this->record->status === 'menunggu') {
+            $this->record->update([
+                'status' => 'ditinjau',
+            ]);
+        }
+    }
+
     protected function getHeaderActions(): array
     {
         return [

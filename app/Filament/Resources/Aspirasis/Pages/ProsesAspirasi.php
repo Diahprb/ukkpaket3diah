@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Aspirasis\Pages;
 
 use App\Filament\Resources\Aspirasis\AspirasiResource;
+use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
@@ -24,13 +25,38 @@ class ProsesAspirasi extends EditRecord
 
     protected static ?string $title = 'Proses Aspirasi';
 
+    public function mount(int|string $record): void
+    {
+        parent::mount($record);
+        $this->record->update([
+            'status' => 'proses',
+        ]);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('batal')
+                ->label('Batal')
+                ->color('gray')
+                ->action(function () {
+                    $this->record->update([
+                        'status' => 'ditinjau',
+                    ]);
+
+                    $this->redirect($this->getResource()::getUrl('index'));
+                }),
+        ];
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema->components([
             Wizard::make($this->getSteps())
                 ->startOnStep($this->getStartStep())
-                ->cancelAction($this->getCancelFormAction())
-                ->submitAction($this->getSubmitFormAction())
+                ->previousAction(fn (Action $action) => $action->label('Kembali'))
+                ->nextAction(fn (Action $action) => $action->label('Lanjut'))
+                ->submitAction($this->getSubmitFormAction()->label('Selesaikan'))
                 ->skippable($this->hasSkippableSteps())
                 ->contained(false)
                 ->columnSpanFull(),
@@ -85,6 +111,10 @@ class ProsesAspirasi extends EditRecord
                             Textarea::make('feedback')
                                 ->label('Feedback / Balasan')
                                 ->placeholder('Tulis balasan atau keterangan untuk siswa...')
+                                ->required()
+                                ->validationMessages([
+                                    'required' => 'Feedback/Umpan Balik Harus diisi!!'
+                                ])
                                 ->rows(5)
                                 ->maxLength(1000),
                             FileUpload::make('bukti_hasil')

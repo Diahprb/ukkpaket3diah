@@ -42,6 +42,7 @@ class AspirasisTable
                     ->badge()
                     ->color(fn($state) => match($state) {
                         'menunggu' => 'warning',
+                        'ditinjau' => Color::Fuchsia,
                         'proses' => 'info',
                         'selesai' => Color::Lime
                     })
@@ -53,6 +54,7 @@ class AspirasisTable
                     ->options([
                         'menunggu' => 'Menunggu',
                         'proses' => 'Di Proses',
+                        'ditinjau' => 'Di Tinjau',
                         'selesai' => 'Selesai',
                     ])
                     ->multiple()
@@ -81,16 +83,26 @@ class AspirasisTable
             ->headerActions([
                  ExportAction::make('aspirasi')
                     ->label('Ekspor Aspirasi')
-                    ->exporter(AspirasiExporter::class),
+                    ->exporter(AspirasiExporter::class)
+                    ->modifyQueryUsing(
+                        fn(\Illuminate\Database\Eloquent\Builder $query, $livewire)
+                            => $livewire->getFilteredSortedTableQuery()
+                    ),
                 CreateAction::make()
                 ->label('Buat Aspirasi')
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->label('Lihat Aspirasi'),
+                    ->label('Lihat Aspirasi')
+                    ->before(function ($record) {
+                        if ($record->status === 'pending') {
+                            $record->update(['status' => 'ditinjau']);
+                        }
+                    }),
 
                 Action::make('prosesAspirasi')
                     ->hidden(fn($record) => $record->status == 'selesai')
+                    ->action(fn($record) => $record->update(['status' => 'proses']))
                     ->url(fn($record)=> ProsesAspirasi::getUrl(['record' => $record]))
             ])
             ->bulkActions([

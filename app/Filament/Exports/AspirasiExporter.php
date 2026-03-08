@@ -15,10 +15,10 @@ class AspirasiExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('siswa.nama')
+            ExportColumn::make('siswa.name')
                 ->label('Nama Siswa'),
 
-            ExportColumn::make('kategori.nama')
+            ExportColumn::make('kategori.nama_kategori')
                 ->label('Kategori'),
 
             ExportColumn::make('judul')

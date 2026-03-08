@@ -10,7 +10,6 @@ use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function Pest\Laravel\delete;
 
 class AspirasiController extends Controller
 {
@@ -71,9 +70,6 @@ class AspirasiController extends Controller
                             ->label('Lihat Aspirasi')
                             ->url(route('filament.admin.resources.aspirasis.view', $aspirasi->id))
                     ]);
-                    // ->sendToDatabase($admin, [
-                    //     'aspirasi_id' => $aspirasi->id
-                    // ]);
             }
         });
 

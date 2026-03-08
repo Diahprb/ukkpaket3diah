@@ -64,7 +64,7 @@
                class="px-3.5 py-2 rounded-xl text-[12.5px] font-semibold border transition-all
                       {{ $active === $val
                           ? 'text-sky-400 border-sky-400/50'
-                          : 'text-slate-400 border-white/10 hover:text-white' }}"
+                          : 'text-slate-400 border-white/10 hover:text-black' }}"
                style="{{ $active === $val
                           ? 'background:rgba(56,189,248,.12)'
                           : 'background:rgba(255,255,255,.05)' }}">
@@ -80,10 +80,50 @@
 
             @php
                 $statusMap = match($asp->status) {
-                    'pending' => ['label' => 'Pending',  'tc' => 'text-amber-400',   'bg' => 'rgba(245,158,11,.15)',  'dot' => 'bg-amber-400',   'blink' => 'dot-blink', 'step' => 1],
-                    'proses'  => ['label' => 'Diproses', 'tc' => 'text-sky-400',     'bg' => 'rgba(56,189,248,.15)',  'dot' => 'bg-sky-400',     'blink' => 'dot-blink', 'step' => 2],
-                    'selesai' => ['label' => 'Selesai',  'tc' => 'text-emerald-400', 'bg' => 'rgba(16,185,129,.15)', 'dot' => 'bg-emerald-400', 'blink' => '',          'step' => 4],
-                    default   => ['label' => ucfirst($asp->status), 'tc' => 'text-slate-400', 'bg' => 'rgba(255,255,255,.08)', 'dot' => 'bg-slate-400', 'blink' => '', 'step' => 1],
+                    'pending' => [
+                        'label' => 'Pending',
+                        'tc' => 'text-amber-400',
+                        'bg' => 'rgba(245,158,11,.15)',
+                        'dot' => 'bg-amber-400',
+                        'blink' => 'dot-blink',
+                        'step' => 1
+                    ],
+
+                    'ditinjau' => [
+                        'label' => 'Ditinjau',
+                        'tc' => 'text-indigo-400',
+                        'bg' => 'rgba(99,102,241,.15)',
+                        'dot' => 'bg-indigo-400',
+                        'blink' => 'dot-blink',
+                        'step' => 2
+                    ],
+
+                    'proses' => [
+                        'label' => 'Diproses',
+                        'tc' => 'text-sky-400',
+                        'bg' => 'rgba(56,189,248,.15)',
+                        'dot' => 'bg-sky-400',
+                        'blink' => 'dot-blink',
+                        'step' => 3
+                    ],
+
+                    'selesai' => [
+                        'label' => 'Selesai',
+                        'tc' => 'text-emerald-400',
+                        'bg' => 'rgba(16,185,129,.15)',
+                        'dot' => 'bg-emerald-400',
+                        'blink' => '',
+                        'step' => 4
+                    ],
+
+                    default => [
+                        'label' => ucfirst($asp->status),
+                        'tc' => 'text-slate-400',
+                        'bg' => 'rgba(255,255,255,.08)',
+                        'dot' => 'bg-slate-400',
+                        'blink' => '',
+                        'step' => 1
+                    ],
                 };
 
                 $steps = [
@@ -161,17 +201,7 @@
             </div>
 
         @empty
-            <div class="rounded-2xl p-10 text-center border border-dashed border-white/10"
-                 style="background:rgba(255,255,255,.03)">
-                <div class="text-4xl mb-3 opacity-30">📭</div>
-                <div class="text-[14px] font-semibold text-slate-400 mb-1">Belum ada aspirasi</div>
-                <div class="text-[12.5px] text-slate-500 mb-5">Jadilah yang pertama menyuarakan aspirasimu!</div>
-                <a href="{{ route('aspirasi.create') }}"
-                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all hover:opacity-90"
-                   style="background:linear-gradient(135deg,#1B4FD8,#0EA5E9);box-shadow:0 4px 20px rgba(27,79,216,.35)">
-                    📝 Buat Aspirasi Pertama
-                </a>
-            </div>
+           <div></div>
         @endforelse
 
     </div>
