@@ -2,8 +2,8 @@
     $hidden = request()->routeIs('login') ? 'hidden' : '';
 @endphp
 
-<nav class="{{ $hidden }} border-b border-blue-600/[.08] flex justify-between items-center px-6 py-1 w-full bg-black">
-    <h1 class="font-bold text-2xl text-white">BeriAspirasi</h1>
+<nav class="{{ $hidden }} border-b border-blue-600/[.08] flex justify-between items-center px-6 py-1 w-full">
+    <h1 class="font-bold text-2xl text-blac">BeriAspirasi</h1>
     <div class="grid grid-cols-[100px_100px_100px] items-center">
         <a href="{{ route('aspirasi.index') }}">
             <label class="flex flex-col items-center py-2.5 rounded-xl cursor-pointer transition-all text-[11px] font-semibold gap-1">
