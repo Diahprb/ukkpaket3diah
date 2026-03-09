@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen py-10 px-4">
-<div class="min-w-xl mx-auto">
+<div class="min-w-6xl mx-auto">
 
     @php
         $statusMap = match($aspirasi->status) {

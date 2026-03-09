@@ -9,7 +9,7 @@
     @livewireStyles
 </head>
 <body class="bg-gray-100 flex flex-col-reverse items-center justify-center">
-    <div class="">
+    <div class="w-full">
         @extends('layouts.nav')
     </div>
 

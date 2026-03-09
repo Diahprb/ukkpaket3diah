@@ -154,9 +154,8 @@
                         ← Kembali
                     </a>
                     <button type="submit"
-                            class="flex-1 py-2.5 rounded-xl text-[13.5px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                            style="background:linear-gradient(135deg,#1B4FD8,#0EA5E9);box-shadow:0 4px 24px rgba(27,79,216,.4)">
-                        🚀 Kirim Aspirasi
+                            class="flex-1 py-2.5 rounded-xl text-[13.5px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center gap-2 bg-black">
+                        Kirim Aspirasi
                     </button>
                 </div>
 

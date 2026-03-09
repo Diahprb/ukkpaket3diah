@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen py-10 px-4">
-<div class="min-w-2xl mx-auto">
+<div class="min-w-6xl mx-auto">
 
     {{-- Hero Header --}}
     <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-100 bg-[#003566]">
