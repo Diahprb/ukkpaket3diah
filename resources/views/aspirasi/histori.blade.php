@@ -165,7 +165,7 @@
                 <div class="prog-track ">
                     @foreach($steps as $n => $lbl)
                         @php
-                            $done   = $n < $statusMap['step'];
+                            $done   = $n < $statusMap['step'] || $statusMap['label'] == 'Selesai';
                             $active = $n === $statusMap['step'];
                         @endphp
                         <div class="prog-step">
@@ -178,7 +178,7 @@
                                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-slate-400"
                                      style="background:rgba(255,255,255,.08)">{{ $n }}</div>
                             @endif
-                            <div class="text-[9px] text-center mt-1 {{ $active ? 'text-white font-semibold' : 'text-slate-400' }}">
+                            <div class="text-[9px] text-center mt-1 {{ $active ? 'text-green-600 font-semibold' : 'text-slate-400' }}">
                                 {{ $lbl }}
                             </div>
                         </div>
