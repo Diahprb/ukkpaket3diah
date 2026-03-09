@@ -36,11 +36,70 @@
         </label>
     </a>
     <div></div>
-     <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button class="flex px-4 py-2.5 my-2 rounded-xl text-[13px] font-semibold text-gray-500 border border-white/10 hover:bg-white/10 transition-all items-center "
-                style="background:rgba(230, 230, 230, 0.06)">
-           <x-heroicon-o-arrow-left-start-on-rectangle class="w-6 h-6" /> Logout
+
+    <form action="{{ route('logout') }}" method="POST">
+    @csrf
+
+    <div x-data="{ open: false }">
+
+        <!-- Button Logout -->
+        <button
+            type="button"
+            @click="open = true"
+            class="flex px-4 py-2.5 my-2 rounded-xl text-[13px] font-semibold text-gray-500 border border-white/10 hover:bg-white/10 transition-all items-center cursor-pointer"
+            style="background:rgba(230, 230, 230, 0.06)"
+        >
+            <x-heroicon-o-arrow-left-start-on-rectangle class="w-6 h-6 mr-2"/>
+            Logout
         </button>
-    </form>
+
+        <!-- Modal -->
+        <div
+            x-show="open"
+            x-transition
+            class="fixed inset-0 flex items-center justify-center z-50"
+            style="background: rgba(0, 0, 0, 0.615)"
+        >
+
+            <div
+                @click.away="open = false"
+                class="bg-white rounded-xl shadow-lg p-6 w-[320px]"
+            >
+
+                <h2 class="text-lg font-semibold mb-2">
+                    Konfirmasi Logout
+                </h2>
+
+                <p class="text-sm text-gray-500 mb-6">
+                    Apakah kamu yakin ingin keluar dari sistem?
+                </p>
+
+                <div class="flex justify-end gap-3">
+
+                    <!-- Cancel -->
+                    <button
+                        type="button"
+                        @click="open = false"
+                        class="px-4 py-2 text-sm rounded-lg bg-gray-200 hover:bg-gray-300"
+                    >
+                        Batal
+                    </button>
+
+                    <!-- Confirm Logout -->
+                    <button
+                        type="submit"
+                        class="px-4 py-2 text-sm rounded-lg bg-red-500 text-white hover:bg-red-600"
+                    >
+                        Ya, Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
 </nav>

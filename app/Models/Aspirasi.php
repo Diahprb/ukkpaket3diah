@@ -15,6 +15,7 @@ class Aspirasi extends Model
         'feedback',
         'admin_id',
         'siswa_id',
+        'tanggal',
         'bukti_lapor',
         'bukti_hasil'
     ];

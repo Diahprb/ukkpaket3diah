@@ -36,12 +36,11 @@ class AspirasiController extends Controller
 
     public function store(Request $request)
     {
-
-
         $validated = $request->validate([
             'kategori_id' => ['required', 'exists:kategoris,id'],
             'judul' => ['required', 'string', 'max:255'],
             'keterangan' => ['required', 'string'],
+            'tanggal' => ['date'],
         ]);
 
         if ($request->bukti_lapor) {
@@ -53,6 +52,7 @@ class AspirasiController extends Controller
             'siswa_id' => Auth::guard('siswa')->id(),
             'kategori_id' => $validated['kategori_id'],
             'judul' => $validated['judul'],
+            'tanggal' => $validated['tanggal'],
             'keterangan' => $validated['keterangan'],
             'bukti_lapor' => $validated['bukti_lapor'] ?? null,
         ]);
@@ -60,18 +60,17 @@ class AspirasiController extends Controller
 
 
         $admin = \App\Models\User::all();
-        User::chunk(100, function ($admins) use ($aspirasi) {
-            foreach ($admins as $admin) {
+        foreach ($admin as $value) {
                 Notification::make()
                     ->title('Aspirasi Baru!')
                     ->body('Ada aspirasi baru dari siswa.')
                     ->actions([
                         Action::make('view')
                             ->label('Lihat Aspirasi')
-                            ->url(route('filament.admin.resources.aspirasis.view', $aspirasi->id))
-                    ]);
-            }
-        });
+                            ->url(fn() => route('filament.admin.resources.aspirasis.view', ['record' => $aspirasi->id]), true)
+                    ])
+                    ->sendToDatabase($value);
+        }
 
         return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil dikirim.');
     }

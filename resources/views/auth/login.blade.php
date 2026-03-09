@@ -32,7 +32,7 @@
                     value="{{ old('nis') }}"
                     required
                     autofocus
-                    class="w-full rounded-xl border-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 text-sm shadow-sm"
+                    class="w-full rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 text-sm shadow-sm"
                 >
                 @error('nis')
                     <span class="text-red-500 text-xs mt-1 block">
@@ -51,7 +51,7 @@
                     type="password"
                     name="password"
                     required
-                    class="w-full rounded-xl border-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 text-sm shadow-sm"
+                    class="w-full rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 text-sm shadow-sm"
                 >
                 @error('password')
                     <span class="text-red-500 text-xs mt-1 block">

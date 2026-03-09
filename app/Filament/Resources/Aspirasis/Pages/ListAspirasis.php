@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Aspirasis\Pages;
 
 use App\Filament\Resources\Aspirasis\AspirasiResource;
 use App\Filament\Widgets\RecapAspirasi;
+use App\Livewire\FilterInformation;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -16,7 +17,8 @@ class ListAspirasis extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            RecapAspirasi::class
+            RecapAspirasi::class,
+            FilterInformation::class
         ];
     }
 }

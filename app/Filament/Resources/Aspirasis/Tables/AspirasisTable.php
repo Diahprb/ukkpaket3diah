@@ -12,6 +12,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Support\Colors\Color;
 use Filament\Tables\Columns\SelectColumn;
@@ -37,6 +38,9 @@ class AspirasisTable
                 TextColumn::make('created_at')
                     ->label('Dibuat Pada')
                     ->dateTime()
+                    ->sortable(),
+                TextColumn::make('tanggal')
+                    ->label('Tanggal kejadian')
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
@@ -75,10 +79,73 @@ class AspirasisTable
                     ->searchable(),
 
                 Filter::make('created_at')
-                    ->form([
-                DateTimePicker::make('created_at')
-                    ->label('Tanggal Dibuat')
-                    ->placeholder('Pilih tanggal'),])
+                ->form([
+                    DatePicker::make('created_from')
+                        ->label('Dari Tanggal (dibuat)')
+                        ->placeholder('Pilih tanggal'),
+                    DatePicker::make('created_until')
+                        ->label('Sampai Tanggal (dibuat)')
+                        ->placeholder('Pilih tanggal '),
+                ])
+                ->columns(2)
+                ->query(function ($query, array $data)  {
+                    return $query
+                        ->when(
+                            $data['created_from'] ?? null,
+                            fn($q) => $q->whereDate('created_at', '>=', $data['created_from'])
+                        )
+                        ->when(
+                            $data['created_until'] ?? null,
+                            fn($q) => $q->whereDate('created_at', '<=', $data['created_until'])
+                        );
+                })
+                ->indicateUsing(function (array $data): array {
+                    $indicators = [];
+
+                    if ($data['created_from'] ?? null) {
+                        $indicators['created_from'] = 'Dari: ' . \Carbon\Carbon::parse($data['created_from'])->format('d M Y');
+                    }
+
+                    if ($data['created_until'] ?? null) {
+                        $indicators['created_until'] = 'Sampai: ' . \Carbon\Carbon::parse($data['created_until'])->format('d M Y');
+                    }
+
+                    return $indicators;
+                }),
+                Filter::make('tanggal')
+                ->form([
+                    DatePicker::make('tanggal_mulai')
+                        ->label('Dari Tanggal (kejadian)')
+                        ->placeholder('Pilih tanggal '),
+                    DatePicker::make('sampai_tanggal')
+                        ->label('Sampai Tanggal (kejadian)')
+                        ->placeholder('Pilih tanggal'),
+                ])
+                ->columns(2)
+                ->query(function ($query, array $data) {
+                    return $query
+                        ->when(
+                            $data['tanggal_mulai'] ?? null,
+                            fn($q) => $q->whereDate('tanggal', '>=', $data['tanggal_mulai'])
+                        )
+                        ->when(
+                            $data['sampai_tanggal'] ?? null,
+                            fn($q) => $q->whereDate('tanggal', '<=', $data['sampai_tanggal'])
+                        );
+                })
+                ->indicateUsing(function (array $data): array {
+                    $indicators = [];
+
+                    if ($data['tanggal_mulai'] ?? null) {
+                        $indicators['tanggal_mulai'] = 'Dari: ' . \Carbon\Carbon::parse($data['tanggal_mulai'])->format('d M Y');
+                    }
+
+                    if ($data['sampai_tanggal'] ?? null) {
+                        $indicators['sampai_tanggal'] = 'Sampai: ' . \Carbon\Carbon::parse($data['sampai_tanggal'])->format('d M Y');
+                    }
+
+                    return $indicators;
+                }),
             ], FiltersLayout::AboveContent)
             ->headerActions([
                  ExportAction::make('aspirasi')
@@ -105,6 +172,8 @@ class AspirasisTable
                     ->action(fn($record) => $record->update(['status' => 'proses']))
                     ->url(fn($record)=> ProsesAspirasi::getUrl(['record' => $record]))
             ])
+            ->emptyStateHeading('Tidak ada aspirasi')
+            ->emptyStateDescription('Buat Aspirasi Atau tidak ada dalam jangkauan filter anda!')
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

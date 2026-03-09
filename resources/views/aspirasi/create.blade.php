@@ -84,6 +84,25 @@
                     @enderror
                 </div>
 
+                {{-- Tanggal Kejadian --}}
+                <div>
+                    <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
+                        Tanggal kejadian <span class="text-red-400">*</span>
+                    </label>
+                    <input type="date"
+                           name="tanggal"
+                           value="{{ old('tanggal') }}"
+                           placeholder="Tanggal Kejadian..."
+                           class="w-full rounded-xl px-4 py-2.5 shadow text-[13.5px] border  transition-all
+                                  @error('tanggal') border-red-500/60 @else border-gray-200 border-1 @enderror"
+                           style="background:rgba(255,255,255,.06);color:black;outline:none">
+                    @error('tanggal')
+                        <span class="flex items-center gap-1 text-[11.5px] text-red-400 mt-1.5">
+                            <span>⚠</span> {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
                 {{-- Keterangan --}}
                 <div>
                     <label class="block text-[12.5px] font-semibold text-slate-700 mb-2">
