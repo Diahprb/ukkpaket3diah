@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen py-10 px-4">
-<div class="min-w-2xl mx-auto">
+<div class="min-w-6xl mx-auto">
 
     {{-- Hero Header --}}
     <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-100 bg-[#003566]">
@@ -93,9 +93,8 @@
                     ← Kembali
                 </a>
                 <button type="submit"
-                        class="flex-1 py-2.5 rounded-xl text-[13.5px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                        style="background:linear-gradient(135deg,#1B4FD8,#0EA5E9);box-shadow:0 4px 24px rgba(27,79,216,.4)">
-                    💾 Perbarui Aspirasi
+                        class="flex-1 py-2.5 rounded-xl text-[13.5px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center gap-2 bg-blue-500">
+                    Perbarui Aspirasi
                 </button>
             </div>
 

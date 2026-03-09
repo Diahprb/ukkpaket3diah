@@ -9,11 +9,11 @@
     @livewireStyles
 </head>
 <body class="bg-gray-100 flex flex-col-reverse items-center justify-center">
-    <div class="w-full">
+    <div class="w-full max-w-full min-w-40">
         @extends('layouts.nav')
     </div>
 
-    <div class="w-full min-h-screen flex justify-center py-10">
+    <div class="w-full flex justify-center py-10">
         @yield('content')
     </div>
     @livewireScripts

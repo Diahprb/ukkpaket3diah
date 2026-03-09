@@ -25,7 +25,7 @@
     <x-filament::section
         heading="Panduan Filter Aspirasi"
         x-show="open"
-        x-transition
+        x-transition.duration.1000ms
     >
 
         <div style="font-size:12px;color:#4b5563;line-height:1.6">
@@ -63,18 +63,16 @@
 
                 <div>
                     <strong>Tanggal Dibuat</strong>
-                    <ul style="margin-left:18px;margin-top:4px">
-                        <li><b>Dari Tanggal</b> — Aspirasi mulai dari tanggal ini.</li>
-                        <li><b>Sampai Tanggal</b> — Aspirasi hingga tanggal ini.</li>
-                    </ul>
+                    <p style="margin-top:4px">
+                        Menampilkan aspirasi yang dibuat tepat pada tanggal yang dipilih.
+                    </p>
                 </div>
 
                 <div>
                     <strong>Tanggal Kejadian</strong>
-                    <ul style="margin-left:18px;margin-top:4px">
-                        <li><b>Dari Tanggal</b> — Aspirasi mulai dari tanggal ini.</li>
-                        <li><b>Sampai Tanggal</b> — Aspirasi hingga tanggal tertentu.</li>
-                    </ul>
+                    <p style="margin-top:4px">
+                        Menampilkan aspirasi berdasarkan tanggal kejadian yang dilaporkan siswa.
+                    </p>
                 </div>
 
             </div>

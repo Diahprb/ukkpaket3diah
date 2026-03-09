@@ -6,7 +6,7 @@
     <div class="min-w-3xl mx-auto">
 
         {{-- Hero Header --}}
-        <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-400/20 bg-black"
+        <div class="rounded-2xl p-7 mb-6 relative overflow-hidden border border-sky-400/20 bg-blue-500"
             >
             <div class="absolute right-7 top-1/2 -translate-y-1/2 text-[64px] opacity-[.12] pointer-events-none select-none">
                 📣
@@ -154,7 +154,7 @@
                         ← Kembali
                     </a>
                     <button type="submit"
-                            class="flex-1 py-2.5 rounded-xl text-[13.5px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center gap-2 bg-black">
+                            class="flex-1 py-2.5 rounded-xl text-[13.5px] font-bold text-white transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center gap-2 bg-blue-500">
                         Kirim Aspirasi
                     </button>
                 </div>
