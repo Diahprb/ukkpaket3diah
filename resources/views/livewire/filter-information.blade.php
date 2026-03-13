@@ -68,12 +68,7 @@
                     </p>
                 </div>
 
-                <div>
-                    <strong>Tanggal Kejadian</strong>
-                    <p style="margin-top:4px">
-                        Menampilkan aspirasi berdasarkan tanggal kejadian yang dilaporkan siswa.
-                    </p>
-                </div>
+               
 
             </div>
 

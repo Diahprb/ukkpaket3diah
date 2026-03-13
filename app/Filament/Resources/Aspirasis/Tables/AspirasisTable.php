@@ -34,8 +34,10 @@ class AspirasisTable
                     ->label('Dibuat Pada')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('tanggal')
-                    ->label('Tanggal Kejadian')
+                TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->date()
+                    ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)->locale('id')->translatedFormat('d F Y'))
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
@@ -73,51 +75,49 @@ class AspirasisTable
                     ->searchable(),
 
                 Filter::make('created_at')
-                    ->label('Tanggal Dibuat')
-                    ->form([
-                        DatePicker::make('created_at')
-                            ->label('Tanggal Dibuat')
-                            ->placeholder('Pilih tanggal')
-                            ->native(false)
-                            ->closeOnDateSelection(),
-                    ])
-                    ->query(function ($query, array $data) {
-                        return $query->when(
-                            $data['created_at'] ?? null,
-                            fn($q) => $q->whereDate('created_at', $data['created_at'])
-                        );
-                    })
-                    ->indicateUsing(function (array $data): array {
-                        $indicators = [];
-                        if ($data['created_at'] ?? null) {
-                            $indicators['created_at'] = 'Dibuat pada: ' . \Carbon\Carbon::parse($data['created_at'])->translatedFormat('d M Y');
-                        }
-                        return $indicators;
-                    }),
+                ->label('Tanggal Dibuat')
+                ->form([
+                    DatePicker::make('created_from')
+                        ->label('Tanggal Mulai')
+                        ->placeholder('Pilih tanggal mulai')
+                        ->native(false),
 
-                Filter::make('tanggal')
-                    ->label('Tanggal Kejadian')
-                    ->form([
-                        DatePicker::make('tanggal')
-                            ->label('Tanggal Kejadian')
-                            ->placeholder('Pilih tanggal')
-                            ->native(false)
-                            ->closeOnDateSelection(),
-                    ])
-                    ->query(function ($query, array $data) {
-                        return $query->when(
-                            $data['tanggal'] ?? null,
-                            fn($q) => $q->whereDate('tanggal', $data['tanggal'])
+                    DatePicker::make('created_until')
+                        ->label('Tanggal Akhir')
+                        ->placeholder('Pilih tanggal akhir')
+                        ->native(false),
+                ])
+                ->columns(2)
+                ->query(function ($query, array $data) {
+                    return $query
+                        ->when(
+                            $data['created_from'] ?? null,
+                            fn ($q) => $q->whereDate('created_at', '>=', $data['created_from'])
+                        )
+                        ->when(
+                            $data['created_until'] ?? null,
+                            fn ($q) => $q->whereDate('created_at', '<=', $data['created_until'])
                         );
-                    })
-                    ->indicateUsing(function (array $data): array {
-                        $indicators = [];
-                        if ($data['tanggal'] ?? null) {
-                            $indicators['tanggal'] = 'Kejadian pada: ' . \Carbon\Carbon::parse($data['tanggal'])->translatedFormat('d M Y');
-                        }
-                        return $indicators;
-                    }),
+                })
+                ->indicateUsing(function (array $data): array {
+                    $indicators = [];
 
+                    if ($data['created_from'] ?? null) {
+                        $indicators['created_from'] =
+                            'Mulai: ' .
+                            \Carbon\Carbon::parse($data['created_from'])
+                            ->translatedFormat('d M Y');
+                    }
+
+                    if ($data['created_until'] ?? null) {
+                        $indicators['created_until'] =
+                            'Sampai: ' .
+                            \Carbon\Carbon::parse($data['created_until'])
+                            ->translatedFormat('d M Y');
+                    }
+
+                    return $indicators;
+                }),
             ], FiltersLayout::AboveContent)
             ->filtersTriggerAction(
                 fn($action) => $action
